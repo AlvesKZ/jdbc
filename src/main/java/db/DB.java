@@ -53,7 +53,7 @@ public class DB {
     }
 
     public static void resultSet(ResultSet rs) {
-        if (st != null) {
+        if (rs != null) {
             try {
                 rs.close();
             } catch (SQLException e) {
