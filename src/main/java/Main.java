@@ -1,5 +1,5 @@
 import db.DB;
-import db.DbExcepition;
+import db.DbIntegrityExcepition;
 
 import java.sql.*;
 
@@ -14,21 +14,19 @@ public class Main {
            conn = DB.getConnection();
 
            st = conn.prepareStatement(
-                   "UPDATE seller "
-                   + "SET BaseSalary = BaseSalary + ? "
+                   "DELETE FROM department "
                    + "WHERE "
-                   + "(DepartmentId = ?)"
+                   + "iD = ? "
            );
 
-           st.setDouble(1, 200.0);
-           st.setInt(2, 2);
+           st.setInt(1, 2);
 
            int rowsAffected = st.executeUpdate();
 
            System.out.println("Done! Rows affected: " + rowsAffected);
 
        } catch (SQLException e) {
-           throw new DbExcepition(e.getMessage());
+           throw new DbIntegrityExcepition(e.getMessage());
        } finally {
            DB.closeStatement(st);
            DB.closeConnection();
